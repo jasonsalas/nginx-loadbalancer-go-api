@@ -8,6 +8,9 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// Adder is a simple artithmetic method that sums a pair of integers. It
+// has nothing to do with the API; it just proved that GitHub Actions
+// will still run the unit tests regardless.
 func Adder(x, y int) int {
 	return x + y
 }
