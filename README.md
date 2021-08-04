@@ -28,10 +28,15 @@ Spin-up the containers hosting the API server - there are [5 by default](https:/
 ***
 **DOCKER HUB IMAGE**
 
-You can spin-up a pre-built image [on Docker Hub](https://hub.docker.com/repository/docker/jasonsalas/nginx-loadbalancer-go-api) without needing to build from source using this command from a terminal: 
-- `docker-compose -f docker-compose-for-docker-hub.yml up -d` 
+You can spin-up a pre-built image [on Docker Hub](https://hub.docker.com/repository/docker/jasonsalas/nginx-loadbalancer-go-api) by pulling the image to your server:
+- `docker pull jasonsalas/nginx-loadbalancer-go-api:latest`
 
-_(Notice that the [modified docker-compose file](https://github.com/jasonsalas/nginx-loadbalancer-go-api/blob/main/docker-compose-for-docker-hub.yml#L5) uses the image from the remote repo instead of building it locally.)_
+...or, you can also run this load balancer application on your server as a pre-built disk image by running the following commands in a terminal:
+- `docker-compose -f docker-compose-for-docker-hub.yml up -d`
 
-Alternately, you can always pull the remote image to your server: 
-- `docker pull jasonsalas/nginx-loadbalancer-go-api:1.0` 
+Then, you'll need to verify which randomized port the API server your server is listening on (it'll be bound to port 5000 on the image):
+- `docker-compose ps -a`
+
+For example, let's assume the port is `12345`. Use this port to make a HTTP request to the load balancer's endpoint:
+
+`curl -X GET localhost:12345/hi`
